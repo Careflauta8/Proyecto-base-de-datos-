@@ -14,8 +14,8 @@ PeliculasController.getAllPeliculas = async (req, res) => {
         } else {
             res.send({"Message":"Lo sentimos, no hemos encontrado ninguna pelicula."})
         }
-
-    } catch (error) {
+    }
+    catch(error) {
         console.log(error);
     }
 }
@@ -68,6 +68,7 @@ PeliculasController.updatePelicula = async (req, res) => {
     }
 }
 
+//es un delete que sirve para eliminar en este caso peliculas//
 PeliculasController.deletePelicula = async (req, res) => {
     let id = req.body.id;
 
@@ -84,4 +85,4 @@ PeliculasController.deletePelicula = async (req, res) => {
 };
 
 //Exporto CarsController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
-module.exports = CarsController;
+module.exports = PeliculasController;

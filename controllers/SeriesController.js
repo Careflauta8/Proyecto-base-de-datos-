@@ -29,7 +29,7 @@ SeriesController.newSerie = async (req, res) => {
 
     try {
 
-        let result = await Serie.create({name: name, brand: brand, director: director, duration: duration, language: language})
+        let result = await Serie.create({name: name, year: year, director: director, duration: duration, language: language})
 
         if(result?.name){
             res.send({"Message": `La serie ${result.name} se ha añadido con éxito`})

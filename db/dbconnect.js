@@ -9,7 +9,7 @@ const dbconnect = () => {
 
     //URI
     //const conn_str = process.env.URI;
-    const conn_str = `mongodb+srv://diego:TY0chgHp8Z1fDeH8@cluster0.xipat0i.mongodb.net/carsMadrid?retryWrites=true&w=majority`;
+    const conn_str = `mongodb+srv://diego:TY0chgHp8Z1fDeH8@cluster0.xipat0i.mongodb.net/entretenimientotv?retryWrites=true&w=majority`;
 
     mongoose.connect(
         conn_str,

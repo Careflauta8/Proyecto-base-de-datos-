@@ -9,7 +9,7 @@ const serieSchema = new Schema ({
         required: true
     },
     year: {
-        type: number,
+        type: Number,
         required: true
     },
     director: {
@@ -17,12 +17,12 @@ const serieSchema = new Schema ({
         required: true
     },
     duration: {
-        type: string,
+        type: String,
         required: true
     },
     language: {
         type: String,
-        required: true
+        required: false
     }
 });
 

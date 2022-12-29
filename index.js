@@ -20,3 +20,6 @@ app.use(router);
 
 //Me conecto a la base de datos
 dbconnect();
+
+//levanto la API
+app.listen(PORT, () => console.log(`Node server running on http://localhost:${PORT}` ))
