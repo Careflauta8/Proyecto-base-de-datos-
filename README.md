@@ -2,7 +2,7 @@
 # BASE DE DATOS #
 
 ## PROYECTO ##
-- Este proyecto se basa en realizar una base de datos que contenga peliculas y series.Es dirigido a un publico general desde pequeños hasta grandes. Se ha utilizado JAVASCRIPT. Me he decantado por desarrollar una base de datos limpia y sencilla, facil de usar.
+- Este proyecto se basa en realizar una base de datos que contenga usuarios,peliculas y series.Se ha utilizado JAVASCRIPT. Me he decantado por desarrollar una base de datos limpia y sencilla, facil de usar.
 
 ## PROCESO ##
 - Desarrollo principal de la idea.

@@ -20,6 +20,31 @@ PeliculasController.getAllPeliculas = async (req, res) => {
     }
 }
 
+PeliculasController.getPeliculaById = async (req, res) => {
+
+    //Este id es el id que ha venido por parámetro en el endpoint (url)
+    let _id = req.params._id;
+    let pelicula = req.pelicula.usuario[0];
+
+    //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
+    if (_id !== user._id) {
+
+        res.send({ "Msg": "Acceso no autorizado" });
+    } else {
+
+        res.send({
+
+            "id": pelicula._id,
+            "name": pelicula.name,
+            "year": pelicula.year,
+            "director": pelicula.director,
+            "duration": pelicula.duration,
+            "language": pelicula.language,
+
+        });
+    }
+}
+
 // es un post que sirve para agregar una pelicula//
 PeliculasController.newPelicula = async (req, res) => {
 
