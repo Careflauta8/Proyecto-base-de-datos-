@@ -52,19 +52,18 @@ UsersController.getUserById = async (req, res) => {
 
 UsersController.getUsersByName = async (req, res) => {
 
-    let name = req.body.name;
+    const name = req.body.name;
 
     try {
-
-        await User.find({
-            name: name
-        })
-            .then(foundUsers => {
-                res.send(foundUsers)
-            })
-
+        const Users = await User.find({name: name})
+        if(Users.length === 0){
+            res.status(404)
+            res.json({error: "User_Not_Found", id:'el rey leon'})
+        }
+        res.send(Users)
     } catch (error) {
-        console.log(error);
+        res.send(500);
+        // console.log(error);
     }
 }
 

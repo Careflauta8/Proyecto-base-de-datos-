@@ -22,7 +22,7 @@ const serieSchema = new Schema ({
     },
     language: {
         type: String,
-        required: false
+        required: true
     }
 });
 

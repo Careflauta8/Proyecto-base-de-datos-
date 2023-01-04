@@ -49,14 +49,15 @@ PeliculasController.getPeliculaById = async (req, res) => {
 PeliculasController.newPelicula = async (req, res) => {
 
     let name = req.body.name;
+    let genre = req.body.genre;
     let year = req.body.year;
     let director = req.body.director;
-    let duration = req.body.duration; 
+    let rated = req.body.rated; 
     let language = req.body.language;  
 
     try {
 
-        let result = await Pelicula.create({name: name, year: year, director: director, duration: duration, language: language})
+        let result = await Pelicula.create({name: name, genre: genre, year: year, director: director, rated: rated, language: language})
 
         if(result?.name){
             res.send({"Message": `La pelicula ${result.name} se ha añadido con éxito`})
@@ -95,11 +96,11 @@ PeliculasController.updatePelicula = async (req, res) => {
 
 //es un delete que sirve para eliminar en este caso peliculas//
 PeliculasController.deletePelicula = async (req, res) => {
-    let id = req.body.id;
+    let _id = req.body._id;
 
     try {
         
-        let result = await Pelicula.findByIdAndDelete(id);
+        let result = await Pelicula.findByIdAndDelete(_id);
 
         res.send({"Message": `La pelicula ${result.name} se ha eliminado con éxito`})
         

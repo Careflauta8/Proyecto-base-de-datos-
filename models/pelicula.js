@@ -2,9 +2,12 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const peliculaSchema = new Schema ({
     name: {
+        type: String,
+        required: true
+    },
+    genre: {
         type: String,
         required: true
     },
@@ -16,13 +19,13 @@ const peliculaSchema = new Schema ({
         type: String,
         required: true
     },
-    duration: {
-        type: String,
+    rated: {
+        type: Number,
         required: true
     },
     language: {
         type: String,
-        required: false
+        required: true
     }
 });
 
