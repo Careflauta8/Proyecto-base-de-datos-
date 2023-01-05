@@ -4,8 +4,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const serieSchema = new Schema ({
-    name: {
+    title: {
         type: String,
+        required: true
+    },
+    genre: {
+        type: Array,
         required: true
     },
     year: {
@@ -16,12 +20,20 @@ const serieSchema = new Schema ({
         type: String,
         required: true
     },
-    duration: {
-        type: String,
+    rated: {
+        type: Number,
         required: true
     },
     language: {
         type: String,
+        required: true
+    },
+    new_chapter_the_next_7_days: {
+        type: Array,
+        required: true
+    },
+    movie_or_theater_pass: {
+        type: Array,
         required: true
     }
 });

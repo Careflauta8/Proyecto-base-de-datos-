@@ -20,40 +20,17 @@ PeliculasController.getAllPeliculas = async (req, res) => {
         console.log(error);
     }
 }
-PeliculasController.postPeliculasByTitle = async (req, res) => {
-
-    const title = req.body.title;
-    try {
-        const titleok = await Pelicula.find({title: title});
-        res.send({ "Msg": titleok });
-    
-    } catch (error) {
-        res.send({"Message": `No tenemos peliculas con esta Nombre ${titleok.name}`})
-    }
-
-    // try {
-    //     const Peliculas = await Pelicula.find({title: title})
-    //     if(Peliculas.length === 0){
-    //         res.status(404)
-    //         res.json({error: "User_Not_Found", id:''})
-    //     }
-    //     res.send(Peliculas)
-    // } catch (error) {
-    //     res.send(500);
-    //     // console.log(error);
-    // }
-}
-
-
+//con el post veo peliculas (title,_id,rated...) que recibe datos por el body//
+// si quisieramos por parametros utilizariamos el get//
 PeliculasController.postPeliculasByRated = async (req, res) => {
     //Este rated es el rated que ha venido por parámetro en el endpoint (url)
     const rated = req.body.rated;
     try {
-        const ratedencontrado = await Pelicula.find({rated: rated});
-        res.send({ "Msg": ratedencontrado });
+        const ratedok = await Pelicula.find({rated: rated});
+        res.send({ "Msg": ratedok });
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con esta Calificacion ${ratedencontrado}`})
+        res.send({"Message": `No tenemos peliculas con esta Calificacion ${ratedok}`})
     }
 
 //     //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
@@ -80,27 +57,38 @@ PeliculasController.postPeliculasById = async (req, res) => {
     //Este id es el id que ha venido por parámetro en el endpoint (url)
     let _id = req.body._id;
     try {
-        const _idencontrado = await Pelicula.find({_id: _id});
-        res.send({ "Msg": _idencontrado});
+        const _idok = await Pelicula.find({_id: _id});
+        res.send({ "Msg": _idok});
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${_idcontrado._id}`})
+        res.send({"Message": `No tenemos peliculas con este genero ${_idok._id}`})
     }
 
+}
+PeliculasController.postPeliculasByTitle = async (req, res) => {
+
+    const title = req.body.title;
+    try {
+        const titleok = await Pelicula.find({title: title});
+        res.send({ "Msg": titleok });
+    
+    } catch (error) {
+        // res.send({"Message": `No tenemos peliculas con esta Nombre ${titleok.name}`})
+    }
 }
 PeliculasController.postPeliculasByGenre = async (req, res) => {
 
     //Este id es el id que ha venido por parámetro en el endpoint (url)
     const genre = req.body.genre;
     try {
-        const generoencontrado = await Pelicula.find({genre: genre});
-        res.send({ "Msg": generoencontrado});
+        const generook = await Pelicula.find({genre: genre});
+        res.send({ "Msg": generook});
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${generoencontrado.genre}`})
+        res.send({"Message": `No tenemos peliculas con este genero ${generook.genre}`})
     }
 }
-// es un post que sirve para agregar una pelicula//
+// es un post que sirve para agregar una nueva pelicula//
 PeliculasController.newPelicula = async (req, res) => {
 
     let title = req.body.title;

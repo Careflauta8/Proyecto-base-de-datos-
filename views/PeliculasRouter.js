@@ -20,12 +20,10 @@ router.delete("/", PeliculasController.deletePelicula);
 
 //Endpoints con middleware...
 
-router.post("/id", PeliculasController.postPeliculasById);
-router.post("/genre", PeliculasController.postPeliculasByGenre);
 router.post("/rated", PeliculasController.postPeliculasByRated);
+router.post("/id", PeliculasController.postPeliculasById);
 router.post("/title", PeliculasController.postPeliculasByTitle);
-
-
+router.post("/genre", PeliculasController.postPeliculasByGenre);
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

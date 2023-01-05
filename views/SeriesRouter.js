@@ -20,9 +20,10 @@ router.delete("/", SeriesController.deleteSerie);
 
 //Endpoints con middleware...
 
-
-// router.get("/profile/:_id", auth, SeriesController.getSerieById);
-// router.post("/name",auth, SeriesController.getSeriesByName);
+router.post("/rated", SeriesController.postSeriesByRated);
+router.post("/id", SeriesController.postSeriesById);
+router.post("/title", SeriesController.postSeriesByTitle);
+router.post("/genre", SeriesController.postSeriesByGenre);
 
 
 
