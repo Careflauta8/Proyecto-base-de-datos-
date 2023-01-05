@@ -14,17 +14,16 @@ const PeliculasController = require('../controllers/PeliculasController');
 
 router.get("/", PeliculasController.getAllPeliculas);
 router.post("/", PeliculasController.newPelicula);
-
 router.put("/", PeliculasController.updatePelicula);
 router.delete("/", PeliculasController.deletePelicula);
 
 
 //Endpoints con middleware...
 
-router.get("/profile/_id",auth, PeliculasController.getPeliculasById);
+router.post("/id", PeliculasController.postPeliculasById);
 router.post("/genre", PeliculasController.postPeliculasByGenre);
-router.get("/profile/rated",auth, PeliculasController.getPeliculasByRated);
-router.post("/name",auth, PeliculasController.getPeliculasByName);
+router.post("/rated", PeliculasController.postPeliculasByRated);
+router.post("/title", PeliculasController.postPeliculasByTitle);
 
 
 

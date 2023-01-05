@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const peliculaSchema = new Schema ({
-    name: {
+    title: {
         type: String,
         required: true
     },
@@ -12,7 +12,7 @@ const peliculaSchema = new Schema ({
         required: true
     },
     year: {
-        type: String,
+        type: Number,
         required: true
     },
     director: {
@@ -25,10 +25,6 @@ const peliculaSchema = new Schema ({
     },
     language: {
         type: String,
-        required: true
-    },
-    newChapters: {
-        type: Array,
         required: true
     }
 });

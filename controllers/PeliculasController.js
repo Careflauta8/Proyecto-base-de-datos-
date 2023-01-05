@@ -20,88 +20,90 @@ PeliculasController.getAllPeliculas = async (req, res) => {
         console.log(error);
     }
 }
-PeliculasController.getPeliculasByName = async (req, res) => {
+PeliculasController.postPeliculasByTitle = async (req, res) => {
 
-    const name = req.body.name;
-
+    const title = req.body.title;
     try {
-        const Peliculas = await Pelicula.find({name: name})
-        if(Peliculas.length === 0){
-            res.status(404)
-            res.json({error: "User_Not_Found", id:''})
-        }
-        res.send(Peliculas)
+        const titleok = await Pelicula.find({title: title});
+        res.send({ "Msg": titleok });
+    
     } catch (error) {
-        res.send(500);
-        // console.log(error);
+        res.send({"Message": `No tenemos peliculas con esta Nombre ${titleok.name}`})
     }
+
+    // try {
+    //     const Peliculas = await Pelicula.find({title: title})
+    //     if(Peliculas.length === 0){
+    //         res.status(404)
+    //         res.json({error: "User_Not_Found", id:''})
+    //     }
+    //     res.send(Peliculas)
+    // } catch (error) {
+    //     res.send(500);
+    //     // console.log(error);
+    // }
 }
-PeliculasController.getPeliculasByRated = async (req, res) => {
-         //Este id es el id que ha venido por parámetro en el endpoint (url)
-         let rated = req.params.rated;
-         let pelicula = req.pelicula.usuario[0];
+
+
+PeliculasController.postPeliculasByRated = async (req, res) => {
+    //Este rated es el rated que ha venido por parámetro en el endpoint (url)
+    const rated = req.body.rated;
+    try {
+        const ratedencontrado = await Pelicula.find({rated: rated});
+        res.send({ "Msg": ratedencontrado });
     
-         //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
-        if (_id !== user._id) {
-    
-            res.send({ "Msg": "Acceso no autorizado" });
-         } else {
-    
-            res.send({
-    
-                 "id": pelicula._id,
-                 "name": pelicula.name,
-                 "genre": pelicula.genre,
-                 "year": pelicula.year,
-                 "director": pelicula.director,
-                 "rated": pelicula.rated,
-                 "language": pelicula.language,
-    
-             });
-         }
+    } catch (error) {
+        res.send({"Message": `No tenemos peliculas con esta Calificacion ${ratedencontrado}`})
+    }
+
+//     //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
+//    if (_id !== user._id) {
+
+//        res.send({ "Msg": "Acceso no autorizado" });
+//     } else {
+
+//        res.send({
+
+//             "id": pelicula._id,
+//             "name": pelicula.name,
+//             "genre": pelicula.genre,
+//             "year": pelicula.year,
+//             "director": pelicula.director,
+//             "rated": pelicula.rated,
+//             "language": pelicula.language,
+
+//         });
+//     }
 }
-PeliculasController.getPeliculasById = async (req, res) => {
+PeliculasController.postPeliculasById = async (req, res) => {
 
     //Este id es el id que ha venido por parámetro en el endpoint (url)
-    let _id = req.params._id;
-    let pelicula = req.pelicula.usuario[0];
-
-    //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
-    if (_id !== user._id) {
-
-        res.send({ "Msg": "Acceso no autorizado" });
-    } else {
-
-        res.send({
-
-            "_id": pelicula._id,
-            "name": pelicula.name,
-            "genre": pelicula.genre,
-            "year": pelicula.year,
-            "director": pelicula.director,
-            "rated": pelicula.rated,
-            "language": pelicula.language,
-
-        });
+    let _id = req.body._id;
+    try {
+        const _idencontrado = await Pelicula.find({_id: _id});
+        res.send({ "Msg": _idencontrado});
+    
+    } catch (error) {
+        res.send({"Message": `No tenemos peliculas con este genero ${_idcontrado._id}`})
     }
-}
 
+}
 PeliculasController.postPeliculasByGenre = async (req, res) => {
 
     //Este id es el id que ha venido por parámetro en el endpoint (url)
-    let genre = req.body.genre;
+    const genre = req.body.genre;
     try {
         const generoencontrado = await Pelicula.find({genre: genre});
         res.send({ "Msg": generoencontrado});
     
     } catch (error) {
-        
+        res.send({"Message": `No tenemos peliculas con este genero ${generoencontrado.genre}`})
     }
 }
 // es un post que sirve para agregar una pelicula//
 PeliculasController.newPelicula = async (req, res) => {
 
-    let name = req.body.name;
+    let title = req.body.title;
     let genre = req.body.genre;
     let year = req.body.year;
     let director = req.body.director;
@@ -110,10 +112,10 @@ PeliculasController.newPelicula = async (req, res) => {
 
     try {
 
-        let result = await Pelicula.create({name: name, genre: genre, year: year, director: director, rated: rated, language: language})
+        let result = await Pelicula.create({title: title, genre: genre, year: year, director: director, rated: rated, language: language})
 
-        if(result?.name){
-            res.send({"Message": `La pelicula ${result.name} se ha añadido con éxito`})
+        if(result?.title){
+            res.send({"Message": `La pelicula ${result.title} se ha añadido con éxito`})
         }
 
     } catch (error) {
