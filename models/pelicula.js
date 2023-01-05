@@ -8,7 +8,7 @@ const peliculaSchema = new Schema ({
         required: true
     },
     genre: {
-        type: String,
+        type: Array,
         required: true
     },
     year: {
@@ -25,6 +25,10 @@ const peliculaSchema = new Schema ({
     },
     language: {
         type: String,
+        required: true
+    },
+    newChapters: {
+        type: Array,
         required: true
     }
 });
