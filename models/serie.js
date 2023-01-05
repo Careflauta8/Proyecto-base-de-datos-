@@ -29,11 +29,11 @@ const serieSchema = new Schema ({
         required: true
     },
     new_chapter_the_next_7_days: {
-        type: Array,
+        type: String,
         required: true
     },
     movie_or_theater_pass: {
-        type: Array,
+        type: String,
         required: true
     }
 });

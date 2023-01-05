@@ -87,6 +87,29 @@ SeriesController.postSeriesByGenre = async (req, res) => {
         res.send({"Message": `No tenemos peliculas con este genero ${generook}`})
     }
 }
+SeriesController.postSeriesByNew_chapter_the_next_7_days = async (req, res) => {
+
+    const new_chapter_the_next_7_days = req.body.new_chapter_the_next_7_days;
+    try {
+        const new_chapter_the_next_7_daysok = await Serie.find({new_chapter_the_next_7_days: new_chapter_the_next_7_days});
+        res.send({ "Msg": new_chapter_the_next_7_daysok});
+    
+    } catch (error) {
+        res.send({"Message": `No tenemos series con esta caracteristica`})
+    }
+}
+SeriesController.postSeriesByMovie_or_theater_pass = async (req, res) => {
+
+    const movie_or_theater_pass = req.body.movie_or_theater_pass;
+    try {
+        const movie_or_theater_passok = await Serie.find({movie_or_theater_pass: movie_or_theater_pass});
+        res.send({ "Msg": movie_or_theater_passok});
+    
+    } catch (error) {
+        res.send({"Message": `No tenemos series con esta caracteristica`})
+    }
+}
+
 // es un post que sirve para agregar una nueva serie//
 SeriesController.newSerie = async (req, res) => {
 
@@ -116,24 +139,24 @@ SeriesController.newSerie = async (req, res) => {
 SeriesController.updateSerie = async (req, res) => {
 
     let id = req.body.id;
-    let newName = req.body.name;
+    let newTitle = req.body.title;
     let newLanguage = req.body.language;
     
     try {
 
         let result = await Serie.findByIdAndUpdate(id, {
             $set: {
-                name: newName,
+                tilte: newTitle,
                 language: newLanguage
             }
         }).setOptions({ returnDocument: 'after' })
 
-        if(result?.name){
+        if(result?.title){
             res.send(result)
         }
 
     } catch (error) {
-        console.log("Error al actualizar el nombre de la serie", error);
+        console.log("Error al actualizar el titulo de la serie", error);
     }
 }
 //es un delete que sirve para eliminar en este caso series//

@@ -1,7 +1,6 @@
 
 const Pelicula = require('../models/pelicula');
 
-
 const PeliculasController = {};
 
 //con el get miro todas las peliculas//
