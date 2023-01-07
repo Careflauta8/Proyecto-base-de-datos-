@@ -22,34 +22,20 @@ SeriesController.getAllSeries = async (req, res) => {
 //con el post veo peliculas (title,_id,rated...) que recibe datos por el body//
 // si quisieramos por parametros utilizariamos el get//
 SeriesController.postSeriesByRated = async (req, res) => {
-    //Este rated es el rated que ha venido por parámetro en el endpoint (url)
+    //Este rated es el rated que ha venido por body en el endpoint (url)
     const rated = req.body.rated;
     try {
         const ratedok = await Serie.find({rated: rated});
-        res.send({ "Msg": ratedok });
-    
+
+        if(rated <= 5){
+            res.send({ "Msg": ratedok });
+        } else {
+            res.send({"Message":"No tenemos peliculas con esta Calificacion"})
+        }
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con esta Calificacion ${ratedok}`})
+        res.status(404);
+        console.log(error);
     }
-
-//     //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
-//    if (_id !== user._id) {
-
-//        res.send({ "Msg": "Acceso no autorizado" });
-//     } else {
-
-//        res.send({
-
-//             "id": pelicula._id,
-//             "name": pelicula.name,
-//             "genre": pelicula.genre,
-//             "year": pelicula.year,
-//             "director": pelicula.director,
-//             "rated": pelicula.rated,
-//             "language": pelicula.language,
-
-//         });
-//     }
 }
 SeriesController.postSeriesById = async (req, res) => {
 

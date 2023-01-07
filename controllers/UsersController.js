@@ -23,7 +23,6 @@ UsersController.getAllUsers = async (req, res) => {
         console.log(error);
     }
 }
-
 UsersController.getUserById = async (req, res) => {
 
     //Este id es el id que ha venido por parámetro en el endpoint (url)
@@ -49,7 +48,6 @@ UsersController.getUserById = async (req, res) => {
         });
     }
 }
-
 UsersController.getUsersByName = async (req, res) => {
 
     const name = req.body.name;
@@ -66,33 +64,6 @@ UsersController.getUsersByName = async (req, res) => {
         // console.log(error);
     }
 }
-
-UsersController.newUser = async (req, res) => {
-
-    let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.ROUNDS));
-
-    try {
-
-        let user = await User.create({
-            name: req.body.name,
-            surname: req.body.surname,
-            dni: req.body.dni,
-            email: req.body.email,
-            password: password,
-            phone: req.body.phone,
-            nationality: req.body.nationality
-        })
-
-        if (user) {
-            res.send({ "Message": `El usuario ${user.name} se ha añadido con éxito` })
-        }
-
-    } catch (error) {
-        console.log(error)
-    }
-
-};
-
 UsersController.updateUser = async (req, res) => {
 
     let dni = req.body.dni;
@@ -117,7 +88,6 @@ UsersController.updateUser = async (req, res) => {
         console.log("Error updating user data", error);
     }
 }
-
 UsersController.deleteUser = async (req, res) => {
     let dni = req.body.dni;
     let userAdmin = req.user.usuario[0];
@@ -136,7 +106,29 @@ UsersController.deleteUser = async (req, res) => {
     }
 
 };
+UsersController.newUser = async (req, res) => {
 
+    let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.ROUNDS));
+
+    try {
+
+        let user = await User.create({
+            name: req.body.name,
+            surname: req.body.surname,
+            email: req.body.email,
+            password: password,
+            
+        })
+
+        if (user) {
+            res.send({ "Message": `El usuario ${user.name} se ha añadido con éxito` })
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+
+};
 UsersController.loginUser = async (req, res) => {
 
     try {

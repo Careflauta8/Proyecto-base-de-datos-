@@ -20,8 +20,8 @@ router.post("/login", UsersController.loginUser);
 
 //Endpoints con middleware...
 router.post("/name",auth, isAdmin, UsersController.getUsersByName);
+router.delete("/admin/deleteuser", auth, UsersController.deleteUser);
 router.get("/profile/:_id", auth, isAdmin, UsersController.getUserById);
-router.delete("/admin/deleteuser", auth, isAdmin, UsersController.deleteUser);
 
 
 
