@@ -6,10 +6,10 @@ const router = express.Router();
 
 //Importo el middleware de auth...
 const auth = require('../middlewares/auth');
-// const isAdmin = require('../middlewares/isAdmin');
+const isAdmin = require('../middlewares/isAdmin');
 
 const PeliculasController = require('../controllers/PeliculasController');
-const isAdmin = require('../middlewares/isAdmin');
+
 
 //Endpoints
 router.post("/", PeliculasController.newPelicula);
@@ -23,6 +23,11 @@ router.post("/title",PeliculasController.postPeliculasByTitle);
 router.post("/genre",PeliculasController.postPeliculasByGenre);
 
 //Endpoints con middleware...
+
+router.post("/rated",auth, PeliculasController.postPeliculasByRated);
+router.post("/id",auth, PeliculasController.postPeliculasById);
+router.post("/title",auth, PeliculasController.postPeliculasByTitle);
+router.post("/genre",auth, PeliculasController.postPeliculasByGenre);
 
 
 

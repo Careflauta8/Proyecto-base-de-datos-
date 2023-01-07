@@ -5,8 +5,8 @@ const express = require('express');
 const router = express.Router();
 
 //Importo el middleware de auth...
-// const auth = require('../middlewares/auth');
-// const isAdmin = require('../middlewares/isAdmin');
+const auth = require('../middlewares/auth');
+const isAdmin = require('../middlewares/isAdmin');
 
 const SeriesController = require('../controllers/SeriesController');
 

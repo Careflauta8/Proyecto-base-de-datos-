@@ -12,18 +12,16 @@ const UsersController = require('../controllers/UsersController');
 
 //Endpoints
 
-
 router.post("/", UsersController.newUser);
 router.put("/", UsersController.updateUser);
 router.post("/login", UsersController.loginUser);
 
-
 //Endpoints con middleware...
 
-router.get("/",auth, isAdmin, UsersController.getAllUsers);
-router.post("/name",auth, isAdmin, UsersController.getUsersByName);
-router.delete("/", auth, isAdmin, UsersController.deleteUser);
-router.get("/profile/:_id", auth, isAdmin, UsersController.getUserById);
+// router.get("/",auth, UsersController.getAllUsers);
+// router.post("/name",auth, UsersController.getUsersByName);
+// router.delete("/", auth, UsersController.deleteUser);
+router.get("/profile/:_id", auth, UsersController.getUserById);
 
 
 
