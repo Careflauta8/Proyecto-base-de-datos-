@@ -10,10 +10,10 @@ const UsersController = {};
 UsersController.getAllUsers = async (req, res) => {
 
     try {
-
+        let userAdmin = req.user.usuario[0];
         let result = await User.find({});
 
-        if (result.length > 0) {
+        if (result.length > 0 && result === userAdmin){
             res.send(result)
         } else {
             res.send({ "Message": "Lo sentimos, no hemos encontrado ningún usuario." })
@@ -40,7 +40,7 @@ UsersController.getUserById = async (req, res) => {
             "id": user._id,
             "name": user.name,
             "surname": user.surname,
-            "dni": user.dni,
+            "email": user.dni,
             "email": user.email,
             "phone": user.phone,
             "nationality": user.nationality
@@ -65,15 +65,14 @@ UsersController.getUsersByName = async (req, res) => {
     }
 }
 UsersController.updateUser = async (req, res) => {
-
-    let dni = req.body.dni;
+    let email = req.body.email;
     let newName = req.body.name;
     let newSurname = req.body.surname;
 
     try {
         let updated = await User.findOneAndUpdate(
             //Query de búsqueda....
-            { dni: dni },
+            { email: email },
             //Campos a cambiar
             {
                 name: newName,
@@ -89,12 +88,12 @@ UsersController.updateUser = async (req, res) => {
     }
 }
 UsersController.deleteUser = async (req, res) => {
-    let dni = req.body.dni;
+    let email = req.body.email;
     let userAdmin = req.user.usuario[0];
 
     try {
         let deleted = await User.findOneAndDelete({
-            dni: dni
+            email: email
         })
 
         if (deleted) {
@@ -117,6 +116,7 @@ UsersController.newUser = async (req, res) => {
             surname: req.body.surname,
             email: req.body.email,
             password: password,
+            rol: req.body.rol
             
         })
 

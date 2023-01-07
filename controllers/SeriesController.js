@@ -7,9 +7,9 @@ const SeriesController = {};
 SeriesController.getAllSeries = async (req, res) => {
 
     try {
-        let Series = await Serie.find({});
+        let series = await Serie.find({});
 
-        if(Series.length > 0){
+        if(series.length > 0){
             res.send(series)
         } else {
             res.send({"Message":"Lo sentimos, no hemos encontrado ninguna Serie."})

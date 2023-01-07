@@ -7,7 +7,7 @@ const PeliculasController = {};
 PeliculasController.getAllPeliculas = async (req, res) => {
 
     try {
-        let peliculas = await pelicula.find({});
+        let peliculas = await Pelicula.find({});
 
         if(peliculas.length > 0){
             res.send(peliculas)
