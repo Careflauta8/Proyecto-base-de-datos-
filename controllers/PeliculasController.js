@@ -139,6 +139,7 @@ PeliculasController.updatePelicula = async (req, res) => {
 //es un delete que sirve para eliminar en este caso peliculas//
 PeliculasController.deletePelicula = async (req, res) => {
     let _id = req.body._id;
+    let userAdmin = req.user.usuario[0];
 
     try {
         
@@ -146,6 +147,22 @@ PeliculasController.deletePelicula = async (req, res) => {
 
         res.send({"Message": `La pelicula ${result.name} se ha eliminado con éxito`})
         
+    } catch (error) {
+        console.log("Error al eliminar la película", error);
+       
+    }
+};
+PeliculasController.deletePeliculaById = async (req, res) => {
+    let _id = req.body._id;
+    let userAdmin = req.user.usuario[0];
+
+    try {
+        if(req.body._id === userAdmin){
+            let result = await Pelicula.findByIdAndDelete(_id);
+            res.send({"Message": `La pelicula ${result.title} se ha eliminado con éxito`})
+        }else{
+            res.send({"Message": `No esta autorizado para eliminar peliculas`});
+        }
     } catch (error) {
         console.log("Error al eliminar la película", error);
        

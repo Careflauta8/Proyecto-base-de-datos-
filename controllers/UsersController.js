@@ -40,10 +40,7 @@ UsersController.getUserById = async (req, res) => {
             "id": user._id,
             "name": user.name,
             "surname": user.surname,
-            "email": user.dni,
             "email": user.email,
-            "phone": user.phone,
-            "nationality": user.nationality
 
         });
     }
@@ -92,15 +89,22 @@ UsersController.deleteUser = async (req, res) => {
     let userAdmin = req.user.usuario[0];
 
     try {
-        let deleted = await User.findOneAndDelete({
-            email: email
-        })
+        if(userAdmin.email !== email){
+            let deleted = await User.findOneAndDelete({
+                email: email
+            })
 
         if (deleted) {
             res.send({ "Message": `El usuario ${deleted.name} ${deleted.surname} se ha eliminado con éxito` })
+        }  else {
+            res.send({"Message": "No hemos encontrado al usuario a borrar"});
         }
+    }else{
+        res.send({"Message": `Eliminacion no possible`});
+
+    }
     } catch (error) {
-        console.log("Error deleting user", error);
+        console.log("Error al eliminar el usuario", error);
 
     }
 

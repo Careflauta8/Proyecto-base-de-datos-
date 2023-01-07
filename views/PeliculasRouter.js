@@ -29,6 +29,8 @@ router.post("/id",auth, PeliculasController.postPeliculasById);
 router.post("/title",auth, PeliculasController.postPeliculasByTitle);
 router.post("/genre",auth, PeliculasController.postPeliculasByGenre);
 
+router.post("/",auth, isAdmin, PeliculasController.newPelicula);
+router.delete("/id",auth, isAdmin, PeliculasController.deletePeliculaById);
 
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
