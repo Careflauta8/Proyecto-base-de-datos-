@@ -46,7 +46,7 @@ SeriesController.postSeriesById = async (req, res) => {
         res.send({ "Msg": _idok});
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${_idok._id}`})
+        res.send({"Message": `No tenemos peliculas con este id ${idok._id}`})
     }
 
 }

@@ -17,8 +17,6 @@ router.post("/", SeriesController.newSerie);
 router.put("/", SeriesController.updateSerie);
 router.delete("/", SeriesController.deleteSerie);
 
-//Endpoints de busqueda//
-
 router.post("/rated", SeriesController.postSeriesByRated);
 router.post("/id", SeriesController.postSeriesById);
 router.post("/title", SeriesController.postSeriesByTitle);
@@ -26,7 +24,15 @@ router.post("/genre", SeriesController.postSeriesByGenre);
 router.post("/new_chapter_the_next_7_days", SeriesController.postSeriesByNew_chapter_the_next_7_days);
 router.post("/movie_or_theater_pass", SeriesController.postSeriesByMovie_or_theater_pass);
 
+
 //Endpoints con middleware...
+
+router.post("/rated",auth, SeriesController.postSeriesByRated);
+router.post("/id",auth, SeriesController.postSeriesById);
+router.post("/title",auth, SeriesController.postSeriesByTitle);
+router.post("/genre",auth, SeriesController.postSeriesByGenre);
+router.post("/new_chapter_the_next_7_days",auth, SeriesController.postSeriesByNew_chapter_the_next_7_days);
+router.post("/movie_or_theater_pass",auth, SeriesController.postSeriesByMovie_or_theater_pass);
 
 
 
