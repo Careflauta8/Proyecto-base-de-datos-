@@ -5,7 +5,6 @@ const SeriesController = {};
 
 //con el get miro todas las series//
 SeriesController.getAllSeries = async (req, res) => {
-
     try {
         let series = await Serie.find({});
 
@@ -124,13 +123,13 @@ SeriesController.newSerie = async (req, res) => {
 //es un put que sirve para actualizar datos//
 SeriesController.updateSerie = async (req, res) => {
 
-    let id = req.body.id;
+    let _id = req.body._id;
     let newTitle = req.body.title;
     let newLanguage = req.body.language;
     
     try {
 
-        let result = await Serie.findByIdAndUpdate(id, {
+        let result = await Serie.findByIdAndUpdate(_id, {
             $set: {
                 tilte: newTitle,
                 language: newLanguage
@@ -138,11 +137,11 @@ SeriesController.updateSerie = async (req, res) => {
         }).setOptions({ returnDocument: 'after' })
 
         if(result?.title){
-            res.send(result)
+            res.send({"Message": `La serie ${result.title} se ha actualizado con éxito`})
         }
 
     } catch (error) {
-        console.log("Error al actualizar el titulo de la serie", error);
+        res.send("Error al actualizar datos de la serie", error);
     }
 }
 //es un delete que sirve para eliminar en este caso series//
@@ -156,10 +155,42 @@ SeriesController.deleteSerie = async (req, res) => {
         res.send({"Message": `La serie ${result.name} se ha eliminado con éxito`})
         
     } catch (error) {
-        console.log("Error al eliminar la serie", error);
+        res.send("Error al eliminar la serie", error);
        
     }
 };
+// SeriesController.deleteSerieById = async (req, res) => {
+//     let _id = req.body._id;
+//     let userAdmin = req.user.usuario[0];
+
+//     try {
+//         if(result?._id === userAdmin){
+//             let result = await Serie.findByIdAndDelete(_id);
+//             res.send({"Message": `La Serie ${result.title} se ha eliminado con éxito`})
+//         }else{
+//             res.send({"Message": `No esta autorizado para eliminar series`});
+//         }
+//     } catch (error) {
+//         console.log("Error al eliminar la serie", error);
+       
+//     }
+// };
+// SeriesController.putSerieById = async (req, res) => {
+//     let _id = req.body._id;
+//     let userAdmin = req.user.usuario[0];
+
+//     try {
+//         if(req.body._id === userAdmin){
+//             let result = await Serie.findByIdAndDelete(_id);
+//             res.send({"Message": `La Serie ${result.title} se ha actualizado con éxito`})
+//         }else{
+//             res.send({"Message": `No esta autorizado para actualizar series`});
+//         }
+//     } catch (error) {
+//         console.log("Error al actualizar la serie", error);
+       
+//     }
+// };
 
 //Exporto SeriesController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = SeriesController;

@@ -25,11 +25,14 @@ PeliculasController.postPeliculasByRated = async (req, res) => {
     //Este rated es el rated que ha venido por parámetro en el endpoint (url)
     const rated = req.body.rated;
     try {
-        const ratedok = await Pelicula.find({rated: rated});
-        res.send({ "Msg": ratedok });
-    
+        if(rated <= 5){
+            const ratedok = await Pelicula.find({rated: rated});
+            res.send({ "Msg": ratedok });
+        }else{
+            res.send({"message": `La Calificacion va de 0 a 5, siendo 5 la mayor puntuacion. No hay peliculas con esta Calificacion ${rated}`})
+        }
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con esta Calificacion ${ratedok}`})
+        res.send({"Message": `No tenemos peliculas con esta Calificacion ${rated}`})
     }
 
 //     //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
@@ -60,7 +63,7 @@ PeliculasController.postPeliculasById = async (req, res) => {
         res.send({ "Msg": _idok});
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${_idok._id}`})
+        res.send({"Message": `No tenemos peliculas con este id ${_id}, Introduzca un id correcto`})
     }
 
 }
@@ -68,11 +71,16 @@ PeliculasController.postPeliculasByTitle = async (req, res) => {
 
     const title = req.body.title;
     try {
-        const titleok = await Pelicula.find({title: title});
-        res.send({ "Msg": titleok });
-    
+         if(title == 'title'){
+            const titleok = await Pelicula.find({title: title});
+            res.send({ "Msg": titleok });
+            console.log("aaaaa");
+         }
+          else{
+             res.send({"message":`No tenemos peliculas con este Nombre ${title}, Compruebe que esta bien escrito`})
+         }
     } catch (error) {
-        // res.send({"Message": `No tenemos peliculas con esta Nombre ${titleok.name}`})
+        res.send({"Message": `No tenemos peliculas con este Nombre ${title}`})
     }
 }
 PeliculasController.postPeliculasByGenre = async (req, res) => {
@@ -152,22 +160,38 @@ PeliculasController.deletePelicula = async (req, res) => {
        
     }
 };
-PeliculasController.deletePeliculaById = async (req, res) => {
-    let _id = req.body._id;
-    let userAdmin = req.user.usuario[0];
+// PeliculasController.deletePeliculaById = async (req, res) => {
+//     let _id = req.body._id;
+//     let userAdmin = req.user.usuario[0];
 
-    try {
-        if(req.body._id === userAdmin){
-            let result = await Pelicula.findByIdAndDelete(_id);
-            res.send({"Message": `La pelicula ${result.title} se ha eliminado con éxito`})
-        }else{
-            res.send({"Message": `No esta autorizado para eliminar peliculas`});
-        }
-    } catch (error) {
-        console.log("Error al eliminar la película", error);
+//     try {
+//         if(req.body._id === userAdmin){
+//             let result = await Pelicula.findByIdAndDelete(_id);
+//             res.send({"Message": `La pelicula ${result.title} se ha eliminado con éxito`})
+//         }else{
+//             res.send({"Message": `No esta autorizado para eliminar peliculas`});
+//         }
+//     } catch (error) {
+//         console.log("Error al eliminar la película", error);
        
-    }
-};
+//     }
+// };
+// PeliculasController.putPeliculaById = async (req, res) => {
+//     let _id = req.body._id;
+//     let userAdmin = req.user.usuario[0];
+
+//     try {
+//         if(req.body._id === userAdmin){
+//             let result = await Pelicula.findByIdAndDelete(_id);
+//             res.send({"Message": `La pelicula ${result.title} se ha actualizado con éxito`})
+//         }else{
+//             res.send({"Message": `No esta autorizado para actualizar peliculas`});
+//         }
+//     } catch (error) {
+//         console.log("Error al actualizar la película", error);
+       
+//     }
+// };
 
 //Exporto CarsController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = PeliculasController;
