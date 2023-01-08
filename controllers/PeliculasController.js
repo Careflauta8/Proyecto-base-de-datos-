@@ -71,14 +71,10 @@ PeliculasController.postPeliculasByTitle = async (req, res) => {
 
     const title = req.body.title;
     try {
-         if(title == 'title'){
             const titleok = await Pelicula.find({title: title});
             res.send({ "Msg": titleok });
             console.log("aaaaa");
-         }
-          else{
-             res.send({"message":`No tenemos peliculas con este Nombre ${title}, Compruebe que esta bien escrito`})
-         }
+
     } catch (error) {
         res.send({"Message": `No tenemos peliculas con este Nombre ${title}`})
     }
