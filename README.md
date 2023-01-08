@@ -7,10 +7,10 @@
 
 ## PROCESO ##
 - Desarrollo principal de la idea.
-- Creación de la base de datos con sus diferentes colecciones (usuarios,peliculas y series).
-- Se lleva a cabo la organización de los usuarios.
+- Creación de la base de datos con sus diferentes colecciones (peliculas, series y usuarios).
 - Se lleva a cabo la organización de las peliculas.
 - Se lleva a cabo la organización de las series.
+- Se lleva a cabo la organización de los usuarios.
 - últimas pinceladas para dejar finiquitado el trabajo, aun queda mucho por mejorar.
 
 #### Endpoints coleccion Peliculas ####
@@ -81,6 +81,27 @@ http://localhost:5500/series
 http://localhost:5500/series
 - router.post("/",auth, SeriesController.newSerie); Con este Endpoint el usuario podra agregar series a la app. Existen otros endpoints para modificar datos o eliminar  series , al ser una app familiar lo que se busca es la interactividad con todos los miembros.
 http://localhost:5500/series
+
+
+#### Endpoints coleccion Usuarios ####
+
+###### Con los siguientes Endpoints el usuario NO necesita estar registrado ######
+- router.post("/", UsersController.newUser); Con este Endpoint el usuario podra crearse un cuenta personal para entrar a la app y asi disfrutar de las ventajas.
+http://localhost:5500/users
+- router.post("/login", UsersController.loginUser); Con este Endpoint el usuario podra logearse y entrar en la app solo metiendo su Email y contraseña para asi poder disfrutar de las ventajas.
+http://localhost:5500/users/login
+
+###### Con los siguientes Endpoints el usuario SI necesita estar registrado y logueado ######
+- router.put("/",auth, UsersController.updateUser); Con este Endpoint el usuario podra actualizar sus datos si en algun momento quiere cambiar por ejemplo la contraseña o el email.
+http://localhost:5500/users
+- router.get("/",auth, UsersController.getAllUsers); Con este Endpoint el usuario podra buscar a los demas usuarios para asi interactuar y obtener opiniones sobre las peliculas o series.
+http://localhost:5500/users
+- router.delete("/", auth, UsersController.deleteUser);  Con este Endpoint el usuario podra eliminar su propia cuenta si ya no desea formar parte de la app.
+http://localhost:5500/users
+- router.post("/name",auth, UsersController.postUsersByName); Con este Endpoint el usuario podra buscar informacion concreta de otros usuarios por medio de su nombre, por ejemplo cuantas peliculas y/o series ha visto.
+http://localhost:5500/users/name
+- router.post("/profile/:_id", auth, UsersController.postUserById); Con este Endpoint el usuario podra buscar informacion concreta de otros usuarios por medio de su Id, por ejemplo su direccion de correo electronico para un contacto.
+http://localhost:5500/users/id
 
 
 ## OBJETIVO ##

@@ -23,10 +23,10 @@ UsersController.getAllUsers = async (req, res) => {
         console.log(error);
     }
 }
-UsersController.getUserById = async (req, res) => {
+UsersController.postUserById = async (req, res) => {
 
     //Este id es el id que ha venido por parámetro en el endpoint (url)
-    let _id = req.params._id;
+    let _id = req.body._id;
     let user = req.user.usuario[0];
 
     //Estos datos de user son lo que el middleware auth ha decodificado del token ;)
@@ -45,7 +45,7 @@ UsersController.getUserById = async (req, res) => {
         });
     }
 }
-UsersController.getUsersByName = async (req, res) => {
+UsersController.postUsersByName = async (req, res) => {
 
     const name = req.body.name;
 
@@ -53,7 +53,7 @@ UsersController.getUsersByName = async (req, res) => {
         const Users = await User.find({name: name})
         if(Users.length === 0){
             res.status(404)
-            res.json({error: "User_Not_Found", id:'el rey leon'})
+            res.json({error: "User_Not_Found", id:'Paco'})
         }
         res.send(Users)
     } catch (error) {

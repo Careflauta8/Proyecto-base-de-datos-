@@ -20,8 +20,8 @@ router.post("/login", UsersController.loginUser);
 router.put("/",auth, UsersController.updateUser);
 router.get("/",auth, UsersController.getAllUsers);
 router.delete("/", auth, UsersController.deleteUser);
-router.post("/name",auth, UsersController.getUsersByName);
-router.get("/profile/:_id", auth, UsersController.getUserById);
+router.post("/name",auth, UsersController.postUsersByName);
+router.post("/profile/:_id", auth, UsersController.postUserById);
 
 
 
