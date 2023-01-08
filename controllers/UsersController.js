@@ -10,10 +10,10 @@ const UsersController = {};
 UsersController.getAllUsers = async (req, res) => {
 
     try {
-        let userAdmin = req.user.usuario[0];
+        // let userAdmin = req.user.usuario[0];
         let result = await User.find({});
 
-        if (result.length > 0 && result === userAdmin){
+        if (result.length > 0){
             res.send(result)
         } else {
             res.send({ "Message": "Lo sentimos, no hemos encontrado ningún usuario." })
@@ -64,7 +64,6 @@ UsersController.getUsersByName = async (req, res) => {
 UsersController.updateUser = async (req, res) => {
     let email = req.body.email;
     let newName = req.body.name;
-    let newSurname = req.body.surname;
 
     try {
         let updated = await User.findOneAndUpdate(
@@ -72,8 +71,8 @@ UsersController.updateUser = async (req, res) => {
             { email: email },
             //Campos a cambiar
             {
-                name: newName,
-                surname: newSurname
+                name: newName
+             
             }).setOptions({ returnDocument: 'after' })
         //con setOptions en este caso voy a exigir que me devuelva el documento modificado
 

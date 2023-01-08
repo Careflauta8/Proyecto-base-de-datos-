@@ -14,8 +14,6 @@ const PeliculasController = require('../controllers/PeliculasController');
 //Endpoints
 
 router.get("/", PeliculasController.getAllPeliculas);
-
-
 router.post("/rated",PeliculasController.postPeliculasByRated);
 router.post("/id",PeliculasController.postPeliculasById);
 router.post("/title",PeliculasController.postPeliculasByTitle);

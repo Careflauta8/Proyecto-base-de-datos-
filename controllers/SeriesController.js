@@ -69,7 +69,7 @@ SeriesController.postSeriesByGenre = async (req, res) => {
         res.send({ "Msg": generook});
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${generook}`})
+        res.send({"Message": `No tenemos peliculas con este genero ${genre}`})
     }
 }
 SeriesController.postSeriesByNew_chapter_the_next_7_days = async (req, res) => {

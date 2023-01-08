@@ -13,14 +13,14 @@ const UsersController = require('../controllers/UsersController');
 //Endpoints
 
 router.post("/", UsersController.newUser);
-router.put("/", UsersController.updateUser);
 router.post("/login", UsersController.loginUser);
 
 //Endpoints con middleware...
 
+router.put("/",auth, UsersController.updateUser);
 router.get("/",auth, UsersController.getAllUsers);
-router.post("/name",auth, UsersController.getUsersByName);
 router.delete("/", auth, UsersController.deleteUser);
+router.post("/name",auth, UsersController.getUsersByName);
 router.get("/profile/:_id", auth, UsersController.getUserById);
 
 
