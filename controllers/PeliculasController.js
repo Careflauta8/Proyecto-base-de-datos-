@@ -68,14 +68,18 @@ PeliculasController.postPeliculasById = async (req, res) => {
 
 }
 PeliculasController.postPeliculasByTitle = async (req, res) => {
-       let title = req.body.title;
+    const title = req.body.title;
     try {
-            const titleok = await Pelicula.find({title: title});
-            res.send({ "Msg": titleok });
-            console.log("entra aqui 1");
+        const foundPeliculas = await Pelicula.find({
+            title: title
+        })
+        if(foundPeliculas.length === 0){
+            res.send({"message": `La pelicula ${title} no se ha encontrado, compruebe que este bien escrito el nombre`});
+        }else{
+            res.send(foundPeliculas)
+        }
     } catch (error) {
-        console.log("entra aqui 2");
-        res.send({"Message": `No tenemos peliculas con este Nombre ${title}`})
+        console.log(error)
     }
 }
 PeliculasController.postPeliculasByGenre = async (req, res) => {
@@ -83,11 +87,16 @@ PeliculasController.postPeliculasByGenre = async (req, res) => {
     //Este id es el id que ha venido por parámetro en el endpoint (url)
     const genre = req.body.genre;
     try {
-        const generook = await Pelicula.find({genre: genre});
-        res.send({ "Msg": generook});
-    
+        const foundPeliculas = await Pelicula.find({
+            genre: genre
+        })
+        if(foundPeliculas.length === 0){
+            res.send({"message": `El Genero ${genre} no se ha encontrado, escriba un Genero de pelicula correcto`});
+        }else{
+            res.send(foundPeliculas)
+        }
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${generook.genre}`})
+        console.log(error)
     }
 }
 // es un post que sirve para agregar una nueva pelicula//

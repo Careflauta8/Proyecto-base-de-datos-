@@ -24,16 +24,14 @@ SeriesController.postSeriesByRated = async (req, res) => {
     //Este rated es el rated que ha venido por body en el endpoint (url)
     const rated = req.body.rated;
     try {
-        const ratedok = await Serie.find({rated: rated});
-
-        if(rated <= 5){
+         if(rated <= 5){
+            const ratedok = await Serie.find({rated: rated});
             res.send({ "Msg": ratedok });
         } else {
-            res.send({"Message":"No tenemos peliculas con esta Calificacion"})
+            res.send({"message": `La Calificacion va de 0 a 5, siendo 5 la mayor puntuacion. No hay peliculas con esta Calificacion ${rated}`})
         }
     } catch (error) {
-        res.status(404);
-        console.log(error);
+        res.send({"Message": `No tenemos peliculas con esta Calificacion ${rated}`})
     }
 }
 SeriesController.postSeriesById = async (req, res) => {
@@ -45,53 +43,79 @@ SeriesController.postSeriesById = async (req, res) => {
         res.send({ "Msg": _idok});
     
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este id ${idok._id}`})
+        res.send({"Message": `No tenemos peliculas con este id ${_id}, compruebe que el Id este bien escrito`})
     }
 
 }
 SeriesController.postSeriesByTitle = async (req, res) => {
-
     const title = req.body.title;
     try {
-        const titleok = await Serie.find({title: title});
-        res.send({ "Msg": titleok });
-    
+        const foundSeries = await Serie.find({
+            title: title
+        })
+        if(foundSeries.length === 0){
+            res.send({"message": `La serie ${title} no se ha encontrado, compruebe qu este bien escrito el nombre`});
+        }else{
+            res.send(foundSeries)
+        }
     } catch (error) {
-        // res.send({"Message": `No tenemos peliculas con esta Nombre ${titleok.name}`})
+        console.log(error)
     }
+
+    // const title = req.body.title;
+    // try {
+    //     const titleok = await Serie.find({title: title});
+    //     res.send({ "Msg": titleok });
+    
+    // } catch (error) {
+    //     // res.send({"Message": `No tenemos peliculas con esta Nombre ${titleok.name}`})
+    // }
 }
 SeriesController.postSeriesByGenre = async (req, res) => {
 
     //Este id es el id que ha venido por parámetro en el endpoint (url)
     const genre = req.body.genre;
     try {
-        const generook = await Serie.find({genre: genre});
-        res.send({ "Msg": generook});
-    
+        const foundSeries = await Serie.find({
+            genre: genre
+        })
+        if(foundSeries.length === 0){
+            res.send({"message": `El Genero ${genre} no se ha encontrado, escriba un Genero de serie correcto`});
+        }else{
+            res.send(foundSeries)
+        }
     } catch (error) {
-        res.send({"Message": `No tenemos peliculas con este genero ${genre}`})
+        console.log(error)
     }
 }
 SeriesController.postSeriesByNew_chapter_the_next_7_days = async (req, res) => {
-
     const new_chapter_the_next_7_days = req.body.new_chapter_the_next_7_days;
     try {
-        const new_chapter_the_next_7_daysok = await Serie.find({new_chapter_the_next_7_days: new_chapter_the_next_7_days});
-        res.send({ "Msg": new_chapter_the_next_7_daysok});
-    
+        const foundSeries = await Serie.find({
+            new_chapter_the_next_7_days: new_chapter_the_next_7_days
+        })
+        if(foundSeries.length === 0){
+            res.send({"message": `La palabra ${new_chapter_the_next_7_days} no esta escrita correctamente, escriba Si o No `});
+        }else{
+            res.send(foundSeries)
+        }
     } catch (error) {
-        res.send({"Message": `No tenemos series con esta caracteristica`})
+        console.log(error)
     }
 }
 SeriesController.postSeriesByMovie_or_theater_pass = async (req, res) => {
-
     const movie_or_theater_pass = req.body.movie_or_theater_pass;
     try {
-        const movie_or_theater_passok = await Serie.find({movie_or_theater_pass: movie_or_theater_pass});
-        res.send({ "Msg": movie_or_theater_passok});
-    
+        const foundSeries = await Serie.find({
+            movie_or_theater_pass: movie_or_theater_pass
+        })
+        if(foundSeries.length === 0){
+            res.send({"message": `La palabra ${movie_or_theater_pass} no esta escrita correctamente, escriba Si o No `});
+        }else{
+            res.send(foundSeries)
+        }
     } catch (error) {
-        res.send({"Message": `No tenemos series con esta caracteristica`})
+        console.log(error)
     }
 }
 
