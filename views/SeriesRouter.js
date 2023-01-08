@@ -13,7 +13,6 @@ const SeriesController = require('../controllers/SeriesController');
 //Endpoints
 
 router.get("/", SeriesController.getAllSeries);
-
 router.post("/rated", SeriesController.postSeriesByRated);
 router.post("/id", SeriesController.postSeriesById);
 router.post("/title", SeriesController.postSeriesByTitle);
