@@ -13,9 +13,6 @@ const SeriesController = require('../controllers/SeriesController');
 //Endpoints
 
 router.get("/", SeriesController.getAllSeries);
-router.post("/", SeriesController.newSerie);
-router.put("/", SeriesController.updateSerie);
-router.delete("/", SeriesController.deleteSerie);
 
 router.post("/rated", SeriesController.postSeriesByRated);
 router.post("/id", SeriesController.postSeriesById);
@@ -33,6 +30,10 @@ router.post("/title",auth, SeriesController.postSeriesByTitle);
 router.post("/genre",auth, SeriesController.postSeriesByGenre);
 router.post("/new_chapter_the_next_7_days",auth, SeriesController.postSeriesByNew_chapter_the_next_7_days);
 router.post("/movie_or_theater_pass",auth, SeriesController.postSeriesByMovie_or_theater_pass);
+router.post("/",auth, SeriesController.newSerie);
+router.put("/",auth, SeriesController.updateSerie);
+router.delete("/",auth, SeriesController.deleteSerie);
+
 
 // router.post("/",auth, isAdmin, SeriesController.newSerie);
 // router.delete("/id",auth, isAdmin, SeriesController.deleteSerieById);

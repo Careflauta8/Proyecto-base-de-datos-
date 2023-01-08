@@ -68,14 +68,13 @@ PeliculasController.postPeliculasById = async (req, res) => {
 
 }
 PeliculasController.postPeliculasByTitle = async (req, res) => {
-
-    const title = req.body.title;
+       let title = req.body.title;
     try {
             const titleok = await Pelicula.find({title: title});
             res.send({ "Msg": titleok });
-            console.log("aaaaa");
-
+            console.log("entra aqui 1");
     } catch (error) {
+        console.log("entra aqui 2");
         res.send({"Message": `No tenemos peliculas con este Nombre ${title}`})
     }
 }
@@ -110,28 +109,27 @@ PeliculasController.newPelicula = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error)
+        res.send({"Message": `No esta autorizado para agregar peliculas nuevas`})
     }
         
 };
-
 //es un put que sirve para actualizar datos//
 PeliculasController.updatePelicula = async (req, res) => {
 
-    let id = req.body.id;
-    let newName = req.body.name;
+    let _id = req.body._id;
+    let newTitle = req.body.title;
     let newLanguage = req.body.language;
     
     try {
 
-        let result = await Pelicula.findByIdAndUpdate(id, {
+        let result = await Pelicula.findByIdAndUpdate(_id, {
             $set: {
-                name: newName,
+                title: newTitle,
                 language: newLanguage
             }
         }).setOptions({ returnDocument: 'after' })
 
-        if(result?.name){
+        if(result?.title){
             res.send(result)
         }
 
@@ -139,23 +137,23 @@ PeliculasController.updatePelicula = async (req, res) => {
         console.log("Error al actualizar el nombre de la película", error);
     }
 }
-
 //es un delete que sirve para eliminar en este caso peliculas//
 PeliculasController.deletePelicula = async (req, res) => {
     let _id = req.body._id;
-    let userAdmin = req.user.usuario[0];
+    // let userAdmin = req.user.usuario[0];
 
     try {
         
         let result = await Pelicula.findByIdAndDelete(_id);
 
-        res.send({"Message": `La pelicula ${result.name} se ha eliminado con éxito`})
+        res.send({"Message": `La pelicula ${result.title} se ha eliminado con éxito`})
         
     } catch (error) {
         console.log("Error al eliminar la película", error);
        
     }
 };
+
 // PeliculasController.deletePeliculaById = async (req, res) => {
 //     let _id = req.body._id;
 //     let userAdmin = req.user.usuario[0];

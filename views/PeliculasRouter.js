@@ -12,10 +12,9 @@ const PeliculasController = require('../controllers/PeliculasController');
 
 
 //Endpoints
-router.post("/", PeliculasController.newPelicula);
+
 router.get("/", PeliculasController.getAllPeliculas);
-router.put("/", PeliculasController.updatePelicula);
-router.delete("/", PeliculasController.deletePelicula);
+
 
 router.post("/rated",PeliculasController.postPeliculasByRated);
 router.post("/id",PeliculasController.postPeliculasById);
@@ -28,6 +27,9 @@ router.post("/rated",auth, PeliculasController.postPeliculasByRated);
 router.post("/id",auth, PeliculasController.postPeliculasById);
 router.post("/title",auth, PeliculasController.postPeliculasByTitle);
 router.post("/genre",auth, PeliculasController.postPeliculasByGenre);
+router.delete("/",auth, PeliculasController.deletePelicula);
+router.put("/",auth, PeliculasController.updatePelicula);
+router.post("/",auth, PeliculasController.newPelicula);
 
 // router.post("/",auth, isAdmin, PeliculasController.newPelicula);
 // router.delete("/id",auth, isAdmin, PeliculasController.deletePeliculaById);

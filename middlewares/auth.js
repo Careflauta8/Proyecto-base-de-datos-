@@ -11,7 +11,7 @@
      // Comprueba si el header (metadatos de la página o si lo hacemos por Postman, está en el authorization) tiene el token
      if(!req.headers.authorization) {
          //Si no lo tiene, no dejará ejecutar la función controladora del endpoint (ver en usuarioRouter) y envía un mensaje de que no hay acceso
-         res.status(401).json({ msg: "Acceso no autorizado" });
+         res.status(401).json({ msg: "Acceso o peticion no autorizado, debe registrarse para poder finalizar la peticion" });
      } else {
  
          // Si lo tiene, Lo extrae

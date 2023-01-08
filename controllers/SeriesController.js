@@ -152,7 +152,7 @@ SeriesController.deleteSerie = async (req, res) => {
         
         let result = await Car.findByIdAndDelete(id);
 
-        res.send({"Message": `La serie ${result.name} se ha eliminado con éxito`})
+        res.send({"Message": `La serie ${result.title} se ha eliminado con éxito`})
         
     } catch (error) {
         res.send("Error al eliminar la serie", error);
