@@ -35,6 +35,14 @@ const serieSchema = new Schema ({
     movie_or_theater_pass: {
         type: String,
         required: true
+    },
+    overview: {
+        type: String,
+        required: true
+    },
+    poster_path: {
+        type: String,
+        required: true
     }
 });
 

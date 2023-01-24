@@ -5,12 +5,13 @@ const jsonwebtoken = require('jsonwebtoken');
 
 const authConfig = require('../config/auth');
 
+
 const UsersController = {};
 
 UsersController.getAllUsers = async (req, res) => {
 
-    try {
-        // let userAdmin = req.user.usuario[0];
+     try {
+       // let userAdmin = req.user.usuario[0];
         let result = await User.find({});
 
         if (result.length > 0){
@@ -45,15 +46,15 @@ UsersController.postUserById = async (req, res) => {
         });
     }
 }
-UsersController.postUsersByName = async (req, res) => {
+UsersController.getUsersByName = async (req, res) => {
 
-    const name = req.body.name;
+    const name = req.params.name;
 
     try {
         const Users = await User.find({name: name})
         if(Users.length === 0){
             res.status(404)
-            res.json({error: "User_Not_Found", id:'Paco'})
+            res.json({error: "Usuario No Encontrado", id:'xxxxxx'})
         }
         res.send(Users)
     } catch (error) {
@@ -119,7 +120,8 @@ UsersController.newUser = async (req, res) => {
             surname: req.body.surname,
             email: req.body.email,
             password: password,
-            rol: req.body.rol
+            country: req.body.country,
+            creditCard: req.body.creditCard
             
         })
 

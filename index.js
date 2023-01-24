@@ -4,15 +4,24 @@
 const express=require('express');
 //Importo métodos de express
 const app=express();
-
+const cors = require('cors');
 const dbconnect = require("./db/dbconnect");
-
-const PORT = 5500;
 
 //Importo fichero ./router
 const router = require('./router');
 
+const PORT = 5500;
+
+//Configuro cors
+let corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+};
+
 //Middlewares
+app.use(cors(corsOptions));
 //Para poder usar json
 app.use(express.json());
 

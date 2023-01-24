@@ -17,12 +17,12 @@
  //Exporto la función middleware
   module.exports = (req, res, next) => {
      //Capturo la id de usuario que nos llega por body
-       let _id = req.body._id;
+       let email = req.body.email;
 
     //Busco en la tabla Usuarios..
      User.find({
          //..un usuario con esa id
-            _id : _id 
+            email : email 
         //Si lo encuentro..
       }).then(foundUser => {
         //..y su rol es admin...

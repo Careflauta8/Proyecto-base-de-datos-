@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "5.1.0",
+    "cors": "^2.8.5",
     "dotenv": "16.0.3",
     "express": "4.18.2",
     "jsonwebtoken": "9.0.0",
@@ -26,6 +27,5 @@
     "url": "https://github.com/Careflauta8/Proyecto-base-de-datos-/issues"
   },
   "homepage": "https://github.com/Careflauta8/Proyecto-base-de-datos-#readme",
-  "devDependencies": {},
   "description": "- Este proyecto se basa en realizar una base de datos que contenga usuarios,peliculas y series.Se ha utilizado JAVASCRIPT. Me he decantado por desarrollar una base de datos limpia y sencilla, facil de usar."
 }

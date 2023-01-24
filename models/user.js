@@ -20,6 +20,13 @@ const userSchema = new Schema ({
         type: String,
         required: true
     },
+    country : {
+        type: String,
+        required: true
+    },
+    creditCard : {
+        type: String,
+    },
     rol: {
         type: String,
         required: false

@@ -87,7 +87,7 @@ http://localhost:5500/series
 
 ###### Con los siguientes Endpoints el usuario NO necesita estar registrado ######
 - router.post("/", UsersController.newUser); Con este Endpoint el usuario podra crearse un cuenta personal para entrar a la app y asi disfrutar de las ventajas.
-http://localhost:5500/users
+ http://localhost:5500/users
 - router.post("/login", UsersController.loginUser); Con este Endpoint el usuario podra logearse y entrar en la app solo metiendo su Email y contraseña para asi poder disfrutar de las ventajas.
 http://localhost:5500/users/login
 

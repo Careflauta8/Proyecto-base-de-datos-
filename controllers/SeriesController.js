@@ -47,11 +47,13 @@ SeriesController.postSeriesById = async (req, res) => {
     }
 
 }
-SeriesController.postSeriesByTitle = async (req, res) => {
-    const title = req.body.title;
+SeriesController.getSeriesByTitle = async (req, res) => {
+    // Person.find({ "name": { "$regex": "Alex", "$options": "i" } },
+    const title = req.params.title;
     try {
         const foundSeries = await Serie.find({
-            title: title
+            'title' :{"$regex": title, "$options": "i"},
+
         })
         if(foundSeries.length === 0){
             res.send({"message": `La serie ${title} no se ha encontrado, compruebe qu este bien escrito el nombre`});
@@ -118,6 +120,7 @@ SeriesController.postSeriesByMovie_or_theater_pass = async (req, res) => {
         console.log(error)
     }
 }
+SeriesController.postSeriesBy
 
 // es un post que sirve para agregar una nueva serie//
 SeriesController.newSerie = async (req, res) => {
@@ -130,10 +133,12 @@ SeriesController.newSerie = async (req, res) => {
     let language = req.body.language;
     let new_chapter_the_next_7_days = req.body.new_chapter_the_next_7_days;
     let movie_or_theater_pass = req.body.movie_or_theater_pass;
+    let overview = req.body.overview;
+    let poster_path = req.body.poster_path;
 
     try {
 
-        let result = await Serie.create({title: title, genre: genre, year: year, director: director, rated: rated, language: language, new_chapter_the_next_7_days: new_chapter_the_next_7_days, movie_or_theater_pass: movie_or_theater_pass})
+        let result = await Serie.create({title: title, genre: genre, year: year, director: director, rated: rated, language: language, new_chapter_the_next_7_days: new_chapter_the_next_7_days, movie_or_theater_pass: movie_or_theater_pass, overview: overview, poster_path: poster_path})
 
         if(result?.title){
             res.send({"Message": `La serie ${result.title} se ha añadido con éxito`})
@@ -183,38 +188,7 @@ SeriesController.deleteSerie = async (req, res) => {
        
     }
 };
-// SeriesController.deleteSerieById = async (req, res) => {
-//     let _id = req.body._id;
-//     let userAdmin = req.user.usuario[0];
 
-//     try {
-//         if(result?._id === userAdmin){
-//             let result = await Serie.findByIdAndDelete(_id);
-//             res.send({"Message": `La Serie ${result.title} se ha eliminado con éxito`})
-//         }else{
-//             res.send({"Message": `No esta autorizado para eliminar series`});
-//         }
-//     } catch (error) {
-//         console.log("Error al eliminar la serie", error);
-       
-//     }
-// };
-// SeriesController.putSerieById = async (req, res) => {
-//     let _id = req.body._id;
-//     let userAdmin = req.user.usuario[0];
-
-//     try {
-//         if(req.body._id === userAdmin){
-//             let result = await Serie.findByIdAndDelete(_id);
-//             res.send({"Message": `La Serie ${result.title} se ha actualizado con éxito`})
-//         }else{
-//             res.send({"Message": `No esta autorizado para actualizar series`});
-//         }
-//     } catch (error) {
-//         console.log("Error al actualizar la serie", error);
-       
-//     }
-// };
 
 //Exporto SeriesController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = SeriesController;

@@ -163,38 +163,7 @@ PeliculasController.deletePelicula = async (req, res) => {
     }
 };
 
-// PeliculasController.deletePeliculaById = async (req, res) => {
-//     let _id = req.body._id;
-//     let userAdmin = req.user.usuario[0];
 
-//     try {
-//         if(req.body._id === userAdmin){
-//             let result = await Pelicula.findByIdAndDelete(_id);
-//             res.send({"Message": `La pelicula ${result.title} se ha eliminado con éxito`})
-//         }else{
-//             res.send({"Message": `No esta autorizado para eliminar peliculas`});
-//         }
-//     } catch (error) {
-//         console.log("Error al eliminar la película", error);
-       
-//     }
-// };
-// PeliculasController.putPeliculaById = async (req, res) => {
-//     let _id = req.body._id;
-//     let userAdmin = req.user.usuario[0];
-
-//     try {
-//         if(req.body._id === userAdmin){
-//             let result = await Pelicula.findByIdAndDelete(_id);
-//             res.send({"Message": `La pelicula ${result.title} se ha actualizado con éxito`})
-//         }else{
-//             res.send({"Message": `No esta autorizado para actualizar peliculas`});
-//         }
-//     } catch (error) {
-//         console.log("Error al actualizar la película", error);
-       
-//     }
-// };
 
 //Exporto CarsController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = PeliculasController;
