@@ -26,6 +26,7 @@ const userSchema = new Schema ({
     },
     creditCard : {
         type: String,
+        required: true
     },
     rol: {
         type: String,
