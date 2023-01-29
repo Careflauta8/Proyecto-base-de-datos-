@@ -8,13 +8,13 @@ const router = express.Router();
 const auth = require('../middlewares/auth');
 const isAdmin = require('../middlewares/isAdmin');
 
-const RentalsController = require('../controllers/RentalsController');
+const AlquileresController = require('../controllers/AlquileresController');
 
 //Endpoints
 
-router.get("/", auth, isAdmin, AlquileresController.getAllAlquileres);
+router.get("/Alquileres", auth, isAdmin, AlquileresController.getAllAlquileres);
 
-router.post("/", auth, AlquileresController.newAlquiler);
+router.post("/newAlquiler", auth, AlquileresController.newAlquiler);
 
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)

@@ -1,32 +1,22 @@
-
-// const  User  = require('../models/user.js');
-
-// module.exports = async (req, res, next) => {
-//     console.log(req.user)
-//     if( foundUser[0].rol == "admin"){
-//         next();
-//     }else {
-//         res.status(401).send(`Acceso Prohibido`)
-//     }
-// };
-
-
- //Importo ../models/usuario' y lo asigno al modelo Usuario
+//Importo ../models/usuario' y lo asigno al modelo Usuario
  const  User  = require('../models/user.js');
 
  //Exporto la función middleware
   module.exports = (req, res, next) => {
      //Capturo la id de usuario que nos llega por body
-       let email = req.body.email;
+       let id = req.user._id;
 
     //Busco en la tabla Usuarios..
-     User.find({
+     User.findOne({
+
          //..un usuario con esa id
-            email : email 
+        name : 'Diego'
         //Si lo encuentro..
-      }).then(foundUser => {
+     }).then(foundUser => {
+        console.log(foundUser, 'Usuarioaaa');
         //..y su rol es admin...
-         if(foundUser[0].rol == "admin"){
+         if(foundUser.rol == "admin"){
+
              //..finaliza el middleware y continuará ejecutando el endpoint donde lo pongamos
              next();
             //Si no es admin solo mostrará un mensaje y ese endpoint no se ejecuta
@@ -34,6 +24,7 @@
               res.send(`Acceso Prohibido`)
          }
       }).catch(error => {
+        console.log(error, 'errorrrrrrr');
           res.send(`Introduce un id de usuario valido`);
       })
 

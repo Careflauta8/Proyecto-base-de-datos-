@@ -1,5 +1,5 @@
-
-const Alquiler = require('../models/rental');
+const Serie = require('../models/serie');
+const Alquiler = require('../models/alquiler');
 
 // const jsonwebtoken = require('jsonwebtoken');
 
@@ -13,8 +13,8 @@ AlquileresController.getAllAlquileres = async (req, res) => {
     try {
 
         let result = await Alquiler.find({})
-            .populate('user_Id')
-            .populate('serie_Id');
+             .populate('userId')
+             .populate('serieId');
 
         if (result.length > 0) {
             res.send(result)
@@ -33,11 +33,12 @@ AlquileresController.newAlquiler = async (req, res) => {
     try {
 
         let user = await Alquiler.create({
-            user_Id: req.body.user_Id,
-            serie_Id: req.body.serie_Id,
-            fechaInicio: req.body.fechaInicio,
-            fechaFin: req.body.fechaFin,
-            importe: req.body.importe
+            userId: req.body.idUser,
+            serieId: req.body.idSerie,
+            fechaInicio: new Date (req.body.fechaInicio),
+            fechaFin: new Date (req.body.fechaFin),
+            importe: req.body.importe,
+            customer: req.body.customer
         })
 
         if (user) {

@@ -25,7 +25,7 @@ router.post("/movie_or_theater_pass", SeriesController.postSeriesByMovie_or_thea
 
 router.post("/rated",auth, SeriesController.postSeriesByRated);
 router.post("/id",auth, SeriesController.postSeriesById);
-router.get("/title/:title",auth, SeriesController.getSeriesByTitle);
+router.get("/title/:title",auth, SeriesController.getSeriesByTitle); //lo tenia /title/:title
 router.post("/genre",auth, SeriesController.postSeriesByGenre);
 router.post("/new_chapter_the_next_7_days",auth, SeriesController.postSeriesByNew_chapter_the_next_7_days);
 router.post("/movie_or_theater_pass",auth, SeriesController.postSeriesByMovie_or_theater_pass);

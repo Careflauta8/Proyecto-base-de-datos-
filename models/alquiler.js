@@ -3,12 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const alquilerSchema = new Schema ({
-    user_Id: {
+    userId: {
         type: Schema.Types.ObjectId, ref: 'User',
         required: true
     },
-    serie_Id: {
-        type: Schema.Types.ObjectId, ref: 'serie',
+    serieId: {
+        type: Schema.Types.ObjectId, ref: 'Serie',
         required: true
     },
     fechaInicio: {
@@ -21,6 +21,14 @@ const alquilerSchema = new Schema ({
     },
     importe: { 
         type: Number,
+        required: true
+    },
+    customer: {
+        type: String,
+        required: true
+    },
+    nameSerie: {
+        type: String,
         required: true
     }
 
