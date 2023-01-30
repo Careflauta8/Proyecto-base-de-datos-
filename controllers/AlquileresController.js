@@ -1,4 +1,4 @@
-const Serie = require('../models/serie');
+
 const Alquiler = require('../models/alquiler');
 
 // const jsonwebtoken = require('jsonwebtoken');
@@ -27,7 +27,6 @@ AlquileresController.getAllAlquileres = async (req, res) => {
     }
 }
 
-
 AlquileresController.newAlquiler = async (req, res) => {
 
     try {
@@ -38,11 +37,11 @@ AlquileresController.newAlquiler = async (req, res) => {
             fechaInicio: new Date (req.body.fechaInicio),
             fechaFin: new Date (req.body.fechaFin),
             importe: req.body.importe,
-            customer: req.body.customer
+            customer: req.body.customer,
+            nameSerie: req.body.nameSerie
         })
 
         if (user) {
-
             res.send({ "Message": `Ha alquilado la serie con éxito` });
 
         }else {
@@ -57,6 +56,20 @@ AlquileresController.newAlquiler = async (req, res) => {
 
 };
 
+AlquileresController.getUserAlquileres = async (req, res) => {
+    let id = req.params.id
+    try{
 
+        let result = await Alquiler.find({userId: id})
+
+        if (result.length > 0){
+            res.send(result)
+        }else{
+            res.send({"message": 'No se ha realizado ningun alquiler'})
+        }
+    }catch (error) {
+        console.log(error)
+    }
+}
 //Exporto CarsController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = AlquileresController;
